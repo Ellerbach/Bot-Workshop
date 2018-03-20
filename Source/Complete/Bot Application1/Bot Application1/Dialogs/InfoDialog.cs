@@ -18,9 +18,9 @@ namespace Bot_Application1.Dialogs
                 Title = "Info",
                 Images = new List<CardImage>()
                 {
-                    new CardImage("http://devdays.sk/images/location.png")
+                    new CardImage("https://store-images.s-microsoft.com/image/apps.45734.14515212426102172.115c6a65-afc3-434e-8905-88fa2ce42bcb.8ca60ad0-a729-4fa1-a5e7-1c100a43aaae?w=180&h=180&q=60")
                 },
-                Text = "Konference se koná 13. 5. na Fakultě informatiky a informačních technologií STU v Bratislavě."
+                Text = "The conference is held somewhere on the planet earth. You will find it on a universe map!"
             };
 
             var reply = context.MakeMessage();

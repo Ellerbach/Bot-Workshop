@@ -19,12 +19,12 @@ namespace Bot_Application1.Dialogs
         {
             if (context.ConversationData.TryGetValue("UserName", out string userName))
             {
-                await context.PostAsync($"No vida, {userName}, rád tě zase vidím!");
+                await context.PostAsync($"Well, {userName}, good to see you again!");
                 ShowOptions(context);
             }
             else
             {
-                PromptDialog.Text(context, AfterNameEntered, "Tebe neznám, jak se jmenuješ?");
+                PromptDialog.Text(context, AfterNameEntered, "I don't know you, what's your name?");
             }
         }
 
@@ -32,7 +32,7 @@ namespace Bot_Application1.Dialogs
         {
             var name = await result;
             context.ConversationData.SetValue("UserName", name);
-            await context.PostAsync($"OK, budu si pamatovat, že jsi {name}.");
+            await context.PostAsync($"OK, I'll remember, you're {name}.");
 
             context.Done(true);
         }
@@ -47,7 +47,7 @@ namespace Bot_Application1.Dialogs
             PromptDialog.Choice(context,
                 AfterTaskSelected,
                 choices,
-                "Co tě zajímá?",
+                "What do you care about?",
                 promptStyle: PromptStyle.Keyboard,
                 attempts: 99
             );

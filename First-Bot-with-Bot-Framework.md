@@ -38,7 +38,7 @@ Download the necessary tools:
 
       private async Task MessageReceivedAsync(IDialogContext context, IAwaitable<object> activity)
       {
-         await context.PostAsync("Slyším!");
+         await context.PostAsync("I'm listening!");
          context.Done(true);
       }
   }
@@ -77,12 +77,12 @@ Download the necessary tools:
   {
       if (context.ConversationData.TryGetValue("UserName", out string userName))
       {
-          await context.PostAsync($"No vida, {userName}, rád tě zase vidím!");
+          await context.PostAsync($"Well, {userName}, good to see you again!");
           context.Done(true);
       }
       else
       {
-          PromptDialog.Text(context, AfterNameEntered, "Tebe neznám, jak se jmenuješ?");
+          PromptDialog.Text(context, AfterNameEntered, "I don't know you, what's your name?");
       }
   }
   ```
@@ -94,7 +94,7 @@ Download the necessary tools:
   {
       var name = await result;
       context.ConversationData.SetValue("UserName", name);
-      await context.PostAsync($"OK, budu si pamatovat, že jsi {name}.");
+      await context.PostAsync($"OK, I'll remember, you're {name}.");
 
       context.Done(true);
   }
@@ -127,7 +127,7 @@ If you try your bot now, it will first ask for your name. From then on it will g
       PromptDialog.Choice(context,
           AfterTaskSelected,
           choices,
-          "Co tě zajímá?",
+          "What do you care about?",
           promptStyle: PromptStyle.Keyboard,
           attempts: 99
       );
@@ -164,12 +164,12 @@ Add the call to ShowOptions to **MessageReceivedAsync**:
 ```c#
 if (context.ConversationData.TryGetValue("UserName", out string userName))
 {
-    await context.PostAsync($"No vida, {userName}, rád tě zase vidím!");
+    await context.PostAsync($"Well, {userName}, good to see you again!");
     ShowOptions(context);
 }
 else
 {
-    PromptDialog.Text(context, AfterNameEntered, "Tebe neznám, jak se jmenuješ?");
+    PromptDialog.Text(context, AfterNameEntered, "I don't know you, what's your name?");
 }
 ```
 
@@ -190,7 +190,7 @@ public class InfoDialog : IDialog<object>
 {
     public async Task StartAsync(IDialogContext context)
     {
-        await context.PostAsync("Konference se koná **13. 5.** na **Fakultě informatiky a informačních technologií STU v Bratislavě.**");
+        await context.PostAsync("The conference is held somewhere **on the planet earth**. You will find it on a **universe map**!");
         context.Done(true);
     }
 }
@@ -204,7 +204,7 @@ public class SpeakersDialog : IDialog<object>
 {
     public async Task StartAsync(IDialogContext context)
     {
-        await context.PostAsync("Máme skvělé speakery. Kdo by tě zajímal?");
+        await context.PostAsync("We have great speakers. Who would you be interested in?");
         context.Wait(MessageReceivedAsync);
     }
 
@@ -230,12 +230,13 @@ public async Task StartAsync(IDialogContext context)
     var reply = context.MakeMessage();
 
     reply.Attachments.Add(new Attachment() {
-        ContentUrl = "http://devdays.sk/images/location.png",
+        // Or replace by any image
+        ContentUrl = "https://store-images.s-microsoft.com/image/apps.45734.14515212426102172.115c6a65-afc3-434e-8905-88fa2ce42bcb.8ca60ad0-a729-4fa1-a5e7-1c100a43aaae?w=180&h=180&q=60",
         ContentType = "image/png",
         Name = "location.png"
     });
 
-    reply.Text = "Konference se koná **13. 5.** na **Fakultě informatiky a informačních technologií STU v Bratislavě.**";
+    reply.Text = "The conference is held somewhere **on the planet earth**. You will find it on a **universe map**!";
     await context.PostAsync(reply);
 
     context.Done(true);
@@ -252,9 +253,9 @@ public async Task StartAsync(IDialogContext context)
         Title = "Info",
         Images = new List<CardImage>()
         {
-            new CardImage("http://devdays.sk/images/location.png")
+            new CardImage("https://store-images.s-microsoft.com/image/apps.45734.14515212426102172.115c6a65-afc3-434e-8905-88fa2ce42bcb.8ca60ad0-a729-4fa1-a5e7-1c100a43aaae?w=180&h=180&q=60")
         },
-        Text = "Konference se koná 13. 5. na Fakultě informatiky a informačních technologií STU v Bratislavě."
+        Text = "The conference is held somewhere on the planet earth. You will find it on a universe map!"
     };
 
     var reply = context.MakeMessage();
@@ -371,10 +372,10 @@ private async Task MessageReceivedAsync(IDialogContext context, IAwaitable<IMess
     }
     else
     {
-        await context.PostAsync("Toho neznám...");
+        await context.PostAsync("I don't know...");
     }
 
-    await context.PostAsync("Kdo dál?");
+    await context.PostAsync("Who else?");
     context.Wait(MessageReceivedAsync);
 }
 ```
@@ -386,7 +387,7 @@ private async Task MessageReceivedAsync(IDialogContext context, IAwaitable<IMess
 {
     var mess = await result;
 
-    if (mess.Text.ToLower().StartsWith("nikdo") || mess.Text.ToLower() == "n" || mess.Text.ToLower() == "back")
+    if (mess.Text.ToLower().StartsWith("no one") || mess.Text.ToLower() == "n" || mess.Text.ToLower() == "back")
     {
         context.Done(true);
         return;
@@ -409,10 +410,11 @@ Try the bot again. You will be able to get back to the Main menu.
    3. *"what is petr doing?"*
    4. *"kdo je petr?"*
    5. *"čemu se petr věnuje?"*
+Note: 4. and 5. are to support local languages if you want. You can add more sentenses if you want.
 5. **Save**.
 6. Set "petr" as a new entity called *name* in all utterances.
 7. **Save** again.
-8. Add more utterances with multiple-word entities.
+8. Add more utterances with multiple-word entities. Same as previously, you can enter multiple languages.
    1. *"who is karel karlík?"*
    2. *"kdo je karel karlík?"*
 9. Train & Test
@@ -515,7 +517,7 @@ public class SpeakersDialog : IDialog<object>
     {
         var mess = await result;
 
-        if (mess.Text.ToLower().StartsWith("nikdo") || mess.Text.ToLower() == "n" || mess.Text.ToLower() == "back")
+        if (mess.Text.ToLower().StartsWith("no one") || mess.Text.ToLower() == "n" || mess.Text.ToLower() == "back")
         {
             context.Done(true);
             return;
@@ -530,12 +532,12 @@ public class SpeakersDialog : IDialog<object>
         }
         else
         {
-            await context.PostAsync("Toho neznám...");
+            await context.PostAsync("I don't know...");
         }
 
         _entity = null;
 
-        await context.PostAsync("Kdo dál?");
+        await context.PostAsync("Who else?");
         context.Wait(MessageReceivedAsync);
     }
 }
@@ -547,6 +549,41 @@ Change **MessageController** to call MainLuisDialog instead of MainDialog.
 //await Conversation.SendAsync(activity, () => new MainDialog());
 await Conversation.SendAsync(activity, () => new MainLuisDialog());
 ```
+
+## Change Default Storage
+
+As default, storage is done in the bot Framework but it's only for testing purpose. You'll need to implement your own storage. As an example, we'll use a temporary, in memory storage.
+
+Add the Microsoft.Bot.Builder.Azure nuget package.
+1. Right click on References
+2. Manage Nuget Packages
+3. Search for "Microsoft.Bot.Builder.Azure"
+4. Install the package and accept the condition
+
+In the file Global.asx.cs, add the following references:
+
+```c#
+using Autofac;
+using Microsoft.Bot.Connector;
+using Microsoft.Bot.Builder.Dialogs;
+using Microsoft.Bot.Builder.Dialogs.Internals;
+using Microsoft.Bot.Builder.Azure;
+```
+
+In the protected void Application_Start(), add the folling code:
+
+```c#
+Conversation.UpdateContainer(
+builder =>
+{
+    var store = new InMemoryDataStore();
+    builder.Register(c => store)
+                .Keyed<IBotDataStore<BotData>>(AzureModule.Key_DataStore)
+                .AsSelf()
+                .SingleInstance();
+});
+```
+It does implement an in memory storage for the states (like the UserName we used). It can be replaced by a SQL Storage or Cosmos DB or Table. See the [documentation](https://docs.microsoft.com/en-us/bot-framework/dotnet/bot-builder-dotnet-state) for more information. You can for example create a Table and store everything in it.
 
 ## Publish to production
 

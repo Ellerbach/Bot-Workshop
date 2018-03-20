@@ -1,14 +1,11 @@
-﻿using Autofac;
-using Microsoft.Bot.Builder.Azure;
+﻿using System;
+using Autofac;
+using System.Web.Http;
+using System.Configuration;
+using Microsoft.Bot.Connector;
 using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Builder.Dialogs.Internals;
-using Microsoft.Bot.Connector;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Http;
-using System.Web.Routing;
+using Microsoft.Bot.Builder.Azure;
 
 namespace Bot_Application1
 {

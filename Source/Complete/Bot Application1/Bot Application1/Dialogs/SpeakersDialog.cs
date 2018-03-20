@@ -30,7 +30,7 @@ namespace Bot_Application1.Dialogs
         {
             var mess = await result;
 
-            if (mess.Text.ToLower().StartsWith("nikdo") || mess.Text.ToLower() == "n" || mess.Text.ToLower() == "back")
+            if (mess.Text.ToLower().StartsWith("no one") || mess.Text.ToLower() == "n" || mess.Text.ToLower() == "back")
             {
                 context.Done(true);
                 return;
@@ -45,12 +45,12 @@ namespace Bot_Application1.Dialogs
             }
             else
             {
-                await context.PostAsync("Toho neznám...");
+                await context.PostAsync("I don't know...");
             }
 
             _entity = null;
 
-            await context.PostAsync("Kdo dál?");
+            await context.PostAsync("Who else?");
             context.Wait(MessageReceivedAsync);
         }
     }

@@ -1,16 +1,11 @@
-﻿using System;
-using System.Linq;
-using System.Net;
+﻿using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
-using System.Web.Http.Description;
-using Microsoft.Bot.Connector;
-using Newtonsoft.Json;
 using Microsoft.Bot.Builder.Dialogs;
-using Bot_Application1.Dialogs;
+using Microsoft.Bot.Connector;
 
-namespace Bot_Application1
+namespace AnoNeBot
 {
     [BotAuthentication]
     public class MessagesController : ApiController
@@ -23,8 +18,8 @@ namespace Bot_Application1
         {
             if (activity.Type == ActivityTypes.Message)
             {
-                await Conversation.SendAsync(activity, () => new MainDialog());
-                //await Conversation.SendAsync(activity, () => new MainLuisDialog());
+                //await Conversation.SendAsync(activity, () => new Dialogs.RootDialog());
+                await Conversation.SendAsync(activity, () => new Dialogs.WhoIsDialog());
             }
             else
             {
