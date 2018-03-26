@@ -9,7 +9,7 @@ In this workshop, you will learn how to create your own chatbot using  **Visual 
 
 It's also a good idea to have a basic understanding of how Web applications work and are built.
 
-For reading documentation, finding solutions to problems in development and programming in general it isbetter to know **English**. This workshop is in English. You'll find some screen cpature in Czech as it was originally designed by [@msimesek](https://github.com/msimecek).
+For reading documentation, finding solutions to problems in development and programming in general it isbetter to know **English**. This workshop is in English. You'll find some screen cpature in Czech as it was originally designed by [@msimecek](https://github.com/msimecek).
 
 ## Output
 
@@ -27,17 +27,17 @@ At the end of this exercise you will have a chatbot with two functionalities:
 
 ## Preparation
 
-[Stáhněte](https://www.visualstudio.com/) and install Visual Studio 2017. The **Community** Edition is enough and free.
+[Download](https://www.visualstudio.com/) and install Visual Studio 2017. The **Community** Edition is enough and free.
 
 When installing, select mainly **ASP.NET and web development**:
 
 ![1517995366078](images/1517995366078.png)
 
-[Stáhněte](https://github.com/Microsoft/BotFramework-Emulator/releases) and install the Bot Framework Emulator. Select the current version, *Setup ... exe*:
+[Download](https://github.com/Microsoft/BotFramework-Emulator/releases) and install the Bot Framework Emulator. Select the current version, *Setup ... exe*:
 
 ![1517995547064](images/1517995547064.png)
 
-Download templates [projektu](http://aka.ms/bf-bc-vstemplate) and files ([controller](http://aka.ms/bf-bc-vscontrollertemplate), [dialog](http://aka.ms/bf-bc-vsdialogtemplate)) for Visual Studio. Copy directly the ZIP files in the Visual Studio folders, **don't expand them**.
+Download templates [projects](http://aka.ms/bf-bc-vstemplate) and files ([controller](http://aka.ms/bf-bc-vscontrollertemplate), [dialog](http://aka.ms/bf-bc-vsdialogtemplate)) for Visual Studio. Copy directly the ZIP files in the Visual Studio folders, **don't expand them**.
 
 * *Bot Application.zip* copy in `%USERPROFILE%\Documents\Visual Studio 2017\Templates\ProjectTemplates\Visual C#\`
 * *Bot Controller.zip* and *Bot Dialog.zip* copy in `%USERPROFILE%\Documents\Visual Studio 2017\Templates\ItemTemplates\Visual C#\`
@@ -58,7 +58,7 @@ In the first part you will learn the basic principles of creating a chatbot and 
 
    ![1517996913543](images/1517996913543.png)
 
-3. The basic skeleton Chatbota is generated.
+3. The basic chatbot skeleton is generated.
 
 4. Press the **F6** key (or select Menu **Build > build Solution**). Wait for the necessary packages to download within a few seconds.
 
@@ -130,7 +130,7 @@ This bot will be "smarter" (funnier) and use an external service. At http://yesn
 
 ![1518006751354](images/1518006751354.png)
 
-First, prepare the so-called. YesNoService:
+First, prepare the so-called YesNoService:
 
 1. In the Solution Explorer pane, create a new folder in the project. Name it **Services**.
 
@@ -208,7 +208,7 @@ The code is now full of expressions underline in red. So far, we will not take n
 We will prepare a corresponding class in C#.
 
 1. Add a new folder to the project, name it **Models**.
-2. Add a new class to it (** Add > Class...**).
+2. Add a new class to it (**Add > Class...**).
 3. Name the file **YesNoModel.cs**.
 4. Complete the implementation:
 
